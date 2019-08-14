@@ -1,0 +1,115 @@
+
+#wrapper {
+    position: relative;
+}
+.width-100 {
+    width: 100%;
+} 
+
+/* Switch button */
+.btn-default.btn-on.active{background-color: #5BB75B;color: white;}
+.btn-default.btn-off.active{background-color: #DA4F49;color: white;}
+.remove_img_preview {
+    position:relative;
+    top:0px;
+    right:5px;
+    background:black;
+    color:white;
+    border-radius:50px;
+    font-size:0.9em;
+    padding: 0 0.3em 0;
+    text-align:center;
+    cursor:pointer;
+}
+.remove_img_preview:before {
+    content: "×";
+}
+.thead-color {
+    background-color: #3c8dbc;
+    /*background-color: #222d32;*/
+    color: white;
+}
+.f-right{
+    float: right;
+}
+.f-left{
+    float: left;
+}
+.m-b-10 {
+    margin-bottom: 10px;
+}
+.m-t-5 {
+    margin-top: 5px;
+}
+.p-0 {
+    padding: 0px;
+}
+.p-t-10 {
+    padding-top: 10px;
+}
+.p-t-25{
+    padding-top: 25px;
+}
+.loader{
+    padding-top: 25%;
+}
+p.parsley-success {
+    color: #468847;
+    background-color: #DFF0D8;
+    border: 1px solid #D6E9C6;
+}
+p.parsley-error {
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border: 1px solid #EED3D7;
+}
+ul.parsley-errors-list {
+    list-style: none;
+    color: #E74C3C;
+    padding-left: 0;
+}
+input.parsley-error,
+textarea.parsley-error,
+select.parsley-error {
+    background: #FAEDEC;
+    border: 1px solid #E85445;
+}
+.btn-group .parsley-errors-list {
+    display: none;
+}
+.help-block {
+    color: red;
+}
+/*** ajax loader ***/
+.ajax_loader {position: fixed; left: 0; top: 0; z-index: 10000; display: none; background: rgba(0,0,0,0.5);
+    position: fixed; text-align: center; height: 100%; width: 100%; overflow: hidden;}
+
+/*** Change Radion button style ***/
+/*input[type="radio"] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    -ms-appearance: checkbox;     
+    -o-appearance: checkbox;      
+}*/
+
+/*** Change Auto complete dropdown style ***/
+.ui-menu .ui-menu-item {
+    padding: .375rem .75rem;
+}
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+/* select2 JS css change */
+.select2-search__field:focus {
+    border: none!important ; 
+}
+
+/* more option button in test list*/
+.more-action:after {
+    content: '\2807';
+    font-size: 1.2em;
+    color: #000000;
+}
