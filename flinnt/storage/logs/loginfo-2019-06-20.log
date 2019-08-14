@@ -1,0 +1,4 @@
+[2019-06-20 15:11:55] local.INFO: first index page called. {"0":"Frontend/HomeController/index","param":[]} 
+[2019-06-20 15:11:55] local.INFO: user login function called. {"0":"Frontend/HomeController/doUserLogin","param":[]} 
+[2019-06-20 15:12:18] local.INFO: Logout logged in user. ["HomeRepository/userLogout"] 
+[2019-06-20 18:43:02] local.INFO: Logout logged in user. ["HomeRepository/userLogout"] 
