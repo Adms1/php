@@ -1,22 +1,29 @@
 <?php
 
 return [
-    //'COURSE_IMG_PATH' => 'images/course',
-    'COURSE_IMG_PATH' => 'images\course',
-    //'BOARD_IMG_PATH' => 'images/board',
-    'BOARD_IMG_PATH' => 'images\board',
-    //'SUBJECT_IMG_PATH' => 'images/board',
-    'SUBJECT_IMG_PATH' => 'images\subject',
-    //'STANDARD_IMG_PATH' => 'images/standard',
-    'STANDARD_IMG_PATH' => 'images\standard',
-    //'COURSE_IMG_PATH' => 'images/course',
-    'COURSE_IMG_PATH' => 'images\course',
-    //'PACKAGE_IMG_PATH' => 'images/package',
-    'PACKAGE_IMG_PATH' => 'images\package',
-    //'USER_IMG_PATH' => 'images/user',
-    'USER_IMG_PATH' => 'images\user',
-    //'INSTITUTE_IMG_PATH' => 'images/institute',
-    'INSTITUTE_IMG_PATH' => 'images\institute',
+    'BOARD_IMG_PATH' => 'images/board',
+    'COURSE_IMG_PATH' => 'images/course',
+    'SUBJECT_IMG_PATH' => 'images/subject',
+    'STANDARD_IMG_PATH' => 'images/standard',
+    'INSTITUTE_IMG_PATH' => 'images/institute',
+    'CKEDITOR_IMG_PATH' => 'images/ckeditor',
+    'PACKAGE_IMG_PATH' => 'images/package',
+    'TUTOR_IMG_PATH' => 'images/tutor',
+    'USER_IMG_PATH' => 'images/user',
+
+    /**** Default IImage ****/
     'DEFAULT_IMAGE' => 'default-image.png',
-    'IMAGE_URL' => '\\192.168.1.50',
+    'DEFAULT_USER_IMAGE' => 'tutor_profile.png',
+    'DEFAULT_PACKAGE_IMAGE' => 'package_default.png',
+
+    //'IMAGE_URL' => 'C:/inetpub/wwwroot/admsystems_testprepadms',
+    'IMAGE_URL' => 'C:/xampp/htdocs/testcraft/public',
+
+    //'CKEDITOR_IMAGE_URL' => 'http://webservice.testcraft.in/',
+    'CKEDITOR_IMAGE_URL' => 'http://localhost/testcraft/public/',
+
+    'WEB_URL' => 'http://testcraft.in',
+    'APP_URL' => 'http://webservice.testcraft.in/webservice.asmx/ReSendOTP',
+
+    'QUESTION_IMAGE_URL' => 'http://content.testcraft.co.in/question/',
 ];

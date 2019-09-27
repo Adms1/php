@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Course;
+use App\CourseSubjectTopic;
 use Log;
 use DB;
 
@@ -102,6 +103,22 @@ class CourseRepository
      */
     public function getCourseDropdown()
     {   
-        return Course::pluck('CourseName','CourseID');
+        return Course::where('IsActive', 1)->pluck('CourseName','CourseID');
+    }
+
+    /**
+     * Get course dropdoown.
+     *
+     * @return array $data
+     */
+    public function getCSTBasedCourseDropdown()
+    {   
+        return DB::table('CourseSubjectTopic')
+            ->join('Course', 'Course.CourseID', '=', 'CourseSubjectTopic.CourseID')
+            ->where('CourseSubjectTopic.IsActive', 1)
+            ->where('Course.IsActive', 1)
+            ->select('Course.CourseID', 'CourseName')
+            ->distinct()
+            ->get()->pluck('CourseName','CourseID');
     }
 }

@@ -23,27 +23,4 @@ class LoginRepository
     {
     
     }
-
-    /**
-     * Do Login.
-     *
-     * @param int $data
-     * @return \Illuminate\Http\Response
-     */
-    // public function doLogin($data)
-    // {
-    //     try {
-    //         return DB::select('exec SP_Get_Student_Login ?, ?', 
-    //                     array(
-    //                         $data['email'],
-    //                         $data['password']
-    //                     )
-    //                 );
-    //     } catch (\Exception $e) {
-    //         Log::channel('loginfo')
-    //             ->error('login process.',['LoginRepository/doLogin', $e->getMessage()]);
-    //         return false;
-    //     }
-    // }    
-
 }

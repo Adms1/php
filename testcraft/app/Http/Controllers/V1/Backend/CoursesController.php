@@ -91,17 +91,6 @@ class CoursesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -127,7 +116,7 @@ class CoursesController extends Controller
 
         $image_info = $this->baseRepository->imageUpload($request, $type='course');
         if (!empty($image_info)) {
-            $data['Icon'] = Config::get('settings.COURSE_IMG_PATH') . '/' .$image_info['image_name'];
+            $data['Icon'] = Config::get('settings.COURSE_IMG_PATH'). '/' .$image_info['image_name'];
         }
 
         $response = $this->courseRepository->update($data, $id);
@@ -137,16 +126,5 @@ class CoursesController extends Controller
         }
 
         return redirect()->route('courses.index')->with('error', Lang::get('admin.ca_update_failed'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

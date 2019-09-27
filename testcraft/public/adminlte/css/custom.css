@@ -2,10 +2,31 @@
 #wrapper {
     position: relative;
 }
+.logo {
+    background-color: white !important;
+}
 .width-100 {
     width: 100%;
-} 
-
+}
+.width-30 {
+    width: 30px;
+}
+.width-50 {
+    width: 50px;
+}
+.font-16 {
+    font-size: 16px;
+}
+.font-14 {
+    font-size: 14px;
+}
+.font-12 {
+    font-size: 12px;
+}
+.img-view {
+    width: 200px;
+    height: 200px;
+}
 /* Switch button */
 .btn-default.btn-on.active{background-color: #5BB75B;color: white;}
 .btn-default.btn-off.active{background-color: #DA4F49;color: white;}
@@ -29,11 +50,17 @@
     /*background-color: #222d32;*/
     color: white;
 }
+.ta-center {
+    text-align: center;
+}
 .f-right{
     float: right;
 }
 .f-left{
     float: left;
+}
+.m-5 {
+    margin: 5px;
 }
 .m-b-10 {
     margin-bottom: 10px;
@@ -41,14 +68,27 @@
 .m-t-5 {
     margin-top: 5px;
 }
+.m-t-20 {
+    margin-top: 20px;
+}
+
 .p-0 {
     padding: 0px;
+}
+.p-10 {
+    padding: 10px;
+}
+.p-l-10 {
+    padding-left: 10px;
 }
 .p-t-10 {
     padding-top: 10px;
 }
 .p-t-25{
     padding-top: 25px;
+}
+.p-r-10{
+    padding-right: 10px;
 }
 .loader{
     padding-top: 25%;
@@ -80,6 +120,9 @@ select.parsley-error {
 .help-block {
     color: red;
 }
+.success-block {
+    color: green;
+}
 /*** ajax loader ***/
 .ajax_loader {position: fixed; left: 0; top: 0; z-index: 10000; display: none; background: rgba(0,0,0,0.5);
     position: fixed; text-align: center; height: 100%; width: 100%; overflow: hidden;}
@@ -91,6 +134,10 @@ select.parsley-error {
     -ms-appearance: checkbox;     
     -o-appearance: checkbox;      
 }*/
+/*** top-bar profile dropdown ***/
+.txt-grey {
+    color: #878787 !important;
+}
 
 /*** Change Auto complete dropdown style ***/
 .ui-menu .ui-menu-item {
@@ -112,4 +159,56 @@ select.parsley-error {
     content: '\2807';
     font-size: 1.2em;
     color: #000000;
+}
+
+.table-scroll {
+    float:left;
+    width:100%;
+    overflow-y: auto;
+    height: 400px;
+}
+
+/* login page */
+.card {
+    border-radius: 0.85rem;
+}
+.forgot_link {
+    color:rgb(135, 135, 135);;
+}
+.forgot_link:hover {
+    color:rgb(135, 135, 135);;
+}
+.signup_color {
+    color: #3c8dbc;
+}
+/* register page */
+#parsley-id-multiple-terms {
+    padding-left: 38%;
+}
+
+/* test create/edit page */
+.test2 {
+    color: white !important;
+    background-color: #222d32 !important;
+    border-color: #ddd !important;
+}
+.p-t-16 {
+    padding-top: 16px;
+}
+.color-white {
+    color: white !important;
+}
+.float-right {
+    float:right;
+}
+.checkbox input[type=checkbox] {
+    margin-left: 0px !important;
+}
+/* select2 js search box */
+.select2-dropdown .select2-search__field, .select2-search--inline .select2-search__field {
+    border: 1px solid #d2d6de !important;
+}
+/* selec2 js for test edit type_id */
+.test-type .select2 {
+    width: 100% !important;
 }

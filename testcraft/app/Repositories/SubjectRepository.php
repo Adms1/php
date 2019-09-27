@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Subject;
 use App\CourseSubject;
+use App\CourseSubjectTopic;
 use App\BoardStandardSubjectChapterTopic;
 use Log;
 use DB;
@@ -98,57 +99,13 @@ class SubjectRepository
     }
 
     /**
-     * Get resource for subject list by board_id, standard_id.
-     *
-     * @param int $board_id
-     * @param int $standard_id
-     * @return \Illuminate\Http\Response
-     */
-    // public function getSubjectListByBoardStandard($board_id, $standard_id)
-    // {
-    //     try {
-    //         return DB::select('exec SP_Web_Get_BoardStandardSubject_List ?, ?', 
-    //                     array(
-    //                         $board_id,
-    //                         $standard_id,
-    //                     )
-    //                 );
-    //     } catch (\Exception $e) {
-    //         Log::channel('loginfo')
-    //             ->error('subject list by ajax.',['SubjectRepository/getSubjectListByBoardStandard', $e->getMessage()]);
-    //         return false;
-    //     }
-    // }
-
-    /**
-     * Get resource for subject list by course id.
-     *
-     * @param int $course_id
-     * @return \Illuminate\Http\Response
-     */
-    // public function getSubjectListByCourse($course_id)
-    // {
-    //     try {
-    //         return DB::select('exec SP_Web_Get_CourseSubject_List ?', 
-    //                     array(
-    //                         $course_id,
-    //                     )
-    //                 );
-    //     } catch (\Exception $e) {
-    //         Log::channel('loginfo')
-    //             ->error('subject list by ajax.',['SubjectRepository/getSubjectListByCourse', $e->getMessage()]);
-    //         return false;
-    //     }
-    // }
-
-    /**
      * Get subject dropdoown.
      *
      * @return array $data
      */
     public function getSubjectDropdown()
     {   
-        return Subject::pluck('SubjectName','SubjectID');
+        return Subject::where('IsActive', 1)->pluck('SubjectName','SubjectID');
     }
 
     /**
@@ -160,10 +117,15 @@ class SubjectRepository
     public function getSubjectListByCourseID($course_id)
     {
         try {
-            return CourseSubject::with(['subject'])
-                        ->where('CourseID', $course_id)
-                        ->get()
-                        ->pluck('subject.SubjectName','subject.SubjectID');
+            return CourseSubjectTopic::leftJoin('Subject', 'Subject.SubjectID', 'CourseSubjectTopic.SubjectID')
+                    ->where('CourseSubjectTopic.IsActive', 1)
+                    ->where('CourseID', $course_id)
+                    ->distinct('SubjectName', 'BoardStandardSubjectChapterTopic.SubjectID')
+                    ->orderBy('SubjectName', 'ASC')
+                    ->get()
+                    ->pluck('SubjectName','SubjectID');
+
+
         } catch (\Exception $e) {
             Log::channel('loginfo')
                 ->error('subject list by ajax.',['SubjectRepository/getSubjectListByCourse', $e->getMessage()]);
@@ -181,11 +143,15 @@ class SubjectRepository
     public function getSubjectListByBoardStandardID($board_id, $standard_id)
     {
         try {
-            return BoardStandardSubjectChapterTopic::with(['subject'])
-                        ->where('BoardID', $board_id)
-                        ->where('StandardID', $standard_id)
-                        ->get()
-                        ->pluck('subject.SubjectName','subject.SubjectID');
+            return BoardStandardSubjectChapterTopic::leftJoin('Subject', 'Subject.SubjectID', 'BoardStandardSubjectChapterTopic.SubjectID')
+                    ->where('BoardStandardSubjectChapterTopic.IsActive', 1)
+                    ->where('BoardID', $board_id)
+                    ->where('StandardID', $standard_id)
+                    ->distinct('SubjectName', 'BoardStandardSubjectChapterTopic.SubjectID')
+                    ->orderBy('SubjectName', 'ASC')
+                    ->get()
+                    ->pluck('SubjectName','SubjectID');
+
         } catch (\Exception $e) {
             Log::channel('loginfo')
                 ->error('subject list by ajax.',['SubjectRepository/getSubjectListByBoardStandard', $e->getMessage()]);

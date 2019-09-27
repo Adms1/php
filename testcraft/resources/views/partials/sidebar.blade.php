@@ -47,13 +47,6 @@
             </li>
             <!-- @endcan -->
 
-            <!-- <li class="{{ $request->segment(1) == 'tutors' ? 'active' : '' }}">
-                <a href="{{ route('tutors.index') }}">
-                    <i class="fa fa-briefcase"></i>
-                    <span class="title">@lang('admin.tutors.title')</span>
-                </a>
-            </li> -->
-
             @if (Auth::guard('admin')->check())
 
             <li class="{{ $request->segment(1) == 'courseTypes' ? 'active' : '' }}">
@@ -131,6 +124,13 @@
             </li>
 
             @endif
+
+            <li class="{{ $request->segment(1) == 'purchasePackages' ? 'active' : '' }}">
+                <a href="{{ route('purchasePackages.index') }}">
+                    <i class="fa fa-briefcase"></i>
+                    <span class="title">@lang('admin.purchase_packages.title')</span>
+                </a>
+            </li>
 
             <!-- <li class="{{ $request->segment(1) == 'units' ? 'active' : '' }}">
                 <a href="{{ route('units.index') }}">

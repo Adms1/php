@@ -88,7 +88,6 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['UserPassword'] =  Hash::make($request->UserPassword);
-        //$data['Icon'] = '';
 
         $image_info = $this->baseRepository->imageUpload($request, $type='user');
         if (!empty($image_info)) {
@@ -96,24 +95,12 @@ class UserController extends Controller
         }
 
         $response = $this->userRepository->store($data);
-
         if ($response) {
             return redirect()->route('users.index')
                 ->with('success', Lang::get('admin.ca_create_successfully'));
         }
 
         return redirect()->route('users.index')->with('error', Lang::get('admin.ca_create_failed'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -139,7 +126,6 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         $data = $request->all();
-        //$data['Icon'] = '';
 
         $image_info = $this->baseRepository->imageUpload($request, $type='user');
         if (!empty($image_info)) {
@@ -147,23 +133,11 @@ class UserController extends Controller
         }
 
         $response = $this->userRepository->update($data, $id);
-
         if ($response) {
             return redirect()->route('users.index')
                 ->with('success', Lang::get('admin.ca_update_successfully'));
         }
 
         return redirect()->route('users.index')->with('error', Lang::get('admin.ca_update_failed'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -1,0 +1,5 @@
+[2019-09-24 17:43:24] local.ERROR: get packaage detail. ["TestPackagesRepository/getPackageDetail","Undefined variable: id"] 
+[2019-09-24 18:01:25] local.ERROR: get packaage detail. ["TestPackagesRepository/getPackageDetail","Undefined variable: id"] 
+[2019-09-24 18:03:12] local.ERROR: get packaage detail. ["TestPackagesRepository/getPackageDetail","Undefined variable: id"] 
+[2019-09-24 18:03:51] local.ERROR: get packaage detail. ["TestPackagesRepository/getPackageDetail","Undefined variable: id"] 
+[2019-09-24 18:05:21] local.ERROR: get packaage detail. ["TestPackagesRepository/getPackageDetail","Undefined variable: id"] 

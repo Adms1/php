@@ -30,8 +30,10 @@ class SubjectsController extends Controller
      *
      * @return void
      */
-    public function __construct(BaseRepository $baseRepository, SubjectRepository $subjectRepository)
-    {
+    public function __construct(
+        BaseRepository $baseRepository,
+        SubjectRepository $subjectRepository
+    ){
         $this->baseRepository = $baseRepository;
         $this->subjectRepository = $subjectRepository;
     }
@@ -82,17 +84,6 @@ class SubjectsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -130,18 +121,7 @@ class SubjectsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
-     * Get subject list by ajax call based on board, standard
+     * Get subject list by ajax call based on board, standard OR Course
      *
      * @param  Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -158,22 +138,16 @@ class SubjectsController extends Controller
             'course_id' => 'required',
         ]);
 
-        if ($board_standard_validator->passes()) {
+        if ($board_standard_validator->passes()) { // Board ID, Standard ID
             $data = $this->subjectRepository->getSubjectListByBoardStandardID($request->board_id, $request->standard_id);
-        } else if ($course_validator->passes()) {
+        } else if ($course_validator->passes()) { // Course ID
             $data = $this->subjectRepository->getSubjectListByCourseID($request->course_id);
-            // if (count($subjects) > 0) {
-            //     foreach ($subjects as $key => $subject) {
-            //         $data[$subject->CourseSubjectID] = $subject->SubjectName;
-            //     }
-            // }
         } else {
             return response()->json([
                 'error'   => true,
                 'message' => $course_validator->errors()
             ]);
         }
-
 
         return response()->json([
             'success' => true,

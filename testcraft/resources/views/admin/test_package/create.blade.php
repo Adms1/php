@@ -93,15 +93,15 @@
                                 </p>
                             @endif
                         </div>
-                        <div class="col-xs-3 form-group">
-                            {!! Form::label('IsActive', trans('admin.test_packages.fields.is-active'), ['class' => 'control-label']) !!}
+                        <!-- <div class="col-xs-3 form-group">
+                            {!! Form::label('StatusID', trans('admin.test_packages.fields.is-active'), ['class' => 'control-label']) !!}
                             <div class="btn-group width-100" id="status" data-toggle="buttons">
                                 <label class="btn btn-default btn-on" >
-                                <input type="radio" value="1" name="IsActive">YES</label>
+                                <input type="radio" value="9" name="StatusID">YES</label>
                                 <label class="btn btn-default btn-off active">
-                                <input type="radio" value="0" name="IsActive" checked="checked">NO</label>
+                                <input type="radio" value="10" name="StatusID" checked="checked">NO</label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-xs-4 form-group">
@@ -126,7 +126,7 @@
                         </div>
                         <div class="col-xs-4 form-group">
                             {!! Form::label('NumberOfTest', trans('admin.test_packages.fields.number').'*', ['class' => 'control-label']) !!}
-                            {!! Form::text('NumberOfTest', old('NumberOfTest'), ['class' => 'form-control', 'placeholder' => '', 'required' => '', 'data-parsley-pattern' => '^[0-9]$']) !!}
+                            {!! Form::number('NumberOfTest', old('NumberOfTest'), ['class' => 'form-control', 'placeholder' => '', 'required' => '', 'max'=>'9', 'min'=>'1']) !!}
 
                             @if($errors->has('NumberOfTest'))
                                 <p class="help-block">
@@ -138,7 +138,7 @@
                     @if (Auth::guard('admin')->check())
                     <div class="row">
                         <div class="col-xs-4 form-group">
-                            {!! Form::label('TestPackageSalePriceTCD', trans('admin.test_packages.fields.sale-price-tcd'), ['class' => 'control-label']) !!}
+                            {!! Form::label('TestPackageSalePriceTCD', trans('admin.test_packages.fields.sale-price-tcd').'*', ['class' => 'control-label']) !!}
                             {!! Form::text('TestPackageSalePriceTCD', old('TestPackageSalePriceTCD'), ['class' => 'form-control', 'placeholder' => '', 'data-parsley-pattern' => '^[0-9]\d*(\.\d+)?$']) !!}
 
                             @if($errors->has('TestPackageSalePriceTCD'))
@@ -148,7 +148,7 @@
                             @endif
                         </div>
                         <div class="col-xs-4 form-group">
-                            {!! Form::label('TestPackageListPriceTCD', trans('admin.test_packages.fields.list-price-tcd'), ['class' => 'control-label']) !!}
+                            {!! Form::label('TestPackageListPriceTCD', trans('admin.test_packages.fields.list-price-tcd').'*', ['class' => 'control-label']) !!}
                             {!! Form::text('TestPackageListPriceTCD', old('TestPackageListPriceTCD'), ['class' => 'form-control', 'placeholder' => '', 'data-parsley-pattern' => '^[0-9]\d*(\.\d+)?$']) !!}
 
                             @if($errors->has('TestPackageListPriceTCD'))
@@ -161,7 +161,7 @@
                     @endif
                     <div class="row">
                         <div class="col-xs-4 form-group academic">
-                            {!! Form::label('BoardID', trans('admin.board_standard_subjects.fields.board-name').'', ['class' => 'control-label']) !!}
+                            {!! Form::label('BoardID', trans('admin.board_standard_subjects.fields.board-name').'*', ['class' => 'control-label']) !!}
                             {!! Form::select('BoardID', $boards, null,['id'=>'board_id', 'class' => 'form-control', 'placeholder' => 'Please Select Board', 'required' => '']) !!}
 
                             @if($errors->has('BoardID'))
@@ -171,7 +171,7 @@
                             @endif
                         </div>
                         <div class="col-xs-4 form-group academic">
-                            {!! Form::label('StandardID', trans('admin.board_standard_subjects.fields.standard-name').'', ['class' => 'control-label']) !!}
+                            {!! Form::label('StandardID', trans('admin.board_standard_subjects.fields.standard-name').'*', ['class' => 'control-label']) !!}
                             {!! Form::select('StandardID', [], null,['id'=>'standard_id', 'class' => 'form-control', 'placeholder' => 'Please Select Standard', 'required' => '']) !!}
 
                             @if($errors->has('StandardID'))
@@ -181,7 +181,7 @@
                             @endif
                         </div>
                         <div class="col-xs-4 form-group competitive">
-                            {!! Form::label('CourseID', trans('admin.course_subjects.fields.course-name').'', ['class' => 'control-label']) !!}
+                            {!! Form::label('CourseID', trans('admin.course_subjects.fields.course-name').'*', ['class' => 'control-label']) !!}
                             {!! Form::select('CourseID', $courses, null,['id'=>'course_id', 'class' => 'form-control', 'placeholder' => 'Please Select Course', 'required' => '']) !!}
 
                             @if($errors->has('CourseID'))
@@ -191,7 +191,7 @@
                             @endif
                         </div>
                         <div class="col-xs-4 form-group academic">
-                            {!! Form::label('SubjectID', trans('admin.board_standard_subjects.fields.subject-name').'', ['class' => 'control-label']) !!}
+                            {!! Form::label('SubjectID', trans('admin.board_standard_subjects.fields.subject-name').'*', ['class' => 'control-label']) !!}
                             {!! Form::select('SubjectID', [], null,['id'=>'subject_id', 'class' => 'form-control', 'placeholder' => 'Please Select Subject', 'required' => '']) !!}
 
                             @if($errors->has('SubjectID'))
@@ -217,10 +217,11 @@
                         <div class="col-xs-6 form-group">
                             {!! Form::label('photo', trans('admin.test_packages.fields.photo'), ['class' => 'control-label']) !!}
                             {!! Form::file('photo', ['id'=>'photo', 'onchange' => 'handleFileSelect()']) !!}
-                            <output id="result" />
+                            <output id="result"></output>
                         </div>
                     </div>
                     {!! Form::hidden('TutorID', old('TutorID'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::hidden('StatusID', 10, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     {!! Form::submit(trans('admin.ca_submit'), ['class' => 'btn btn-success']) !!}
                     <a href="{{ route('testPackages.index') }}" class="btn btn-info">@lang('admin.ca_cancel')</a>
                     {!! Form::close() !!}
@@ -236,10 +237,24 @@
 <script src="{{asset('adminlte/plugins/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
 <script type="text/javascript">
 
-    /**** Ckeditor ****/ 
-    CKEDITOR.replace('TestPackageDescription', {
-        height: 100
-    });
+    /***** Sorting for selection field *****/
+    function sortingValue(data, textObj) {
+        var temp = [];
+
+        $.each(data, function(key, value) {
+            temp.push({v:value, k: key});
+        });
+
+        temp.sort(function(a,b){
+            if(a.v > b.v){ return 1}
+            if(a.v < b.v){ return -1}
+            return 0;
+        });
+
+        $.each(temp, function(key, obj) {
+            textObj.append($("<option></option>").attr("value", obj.k).text(obj.v));
+        });
+    }
 
     /**** Show image preview ****/
     function handleFileSelect() {
@@ -270,6 +285,20 @@
     }
 
     $(document).ready(function() {
+        /**** Select2 Dropdown ****/ 
+        $('#board_id').select2({
+            placeholder: 'Please Select Board',
+        });
+        $('#standard_id').select2({
+            placeholder: 'Please Select Standard',
+        });
+        $('#subject_id').select2({
+            placeholder: 'Please Select Subject',
+        });
+        $('#course_id').select2({
+            placeholder: 'Please Select Course',
+        });
+
         $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -303,6 +332,8 @@
                 $('.academic').fadeIn('slow');
                 $(".academic :input").prop("required", true);
                 $(".competitive :input").prop("required", false);
+                $('select[name="StandardID"]').empty();
+                $('select[name="SubjectID"]').empty();
             } else {
                 $(".academic :input").prop("required", false);
                 $('.competitive').fadeIn('slow');
@@ -324,6 +355,7 @@
                     $("#ajax_loader").css("display", "none");
                     if (data.success) {
                         $('select[name="StandardID"]').empty();
+                        $('select[name="SubjectID"]').empty();
                         $('select[name="StandardID"]').append('<option value=""> Please Select Standard </option>');
                         $.each(data.data, function(key, value) {
                             $('select[name="StandardID"]').append('<option value="'+ key +'">'+ value +'</option>');
@@ -349,37 +381,11 @@
                     if (data.success) {
                         $('select[name="SubjectID"]').empty();
                         $('select[name="SubjectID"]').append('<option value=""> Please Select Subject </option>');
-                        $.each(data.data, function(key, value) {
-                            $('select[name="SubjectID"]').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
-                        $('select[name="SubjectID"]').attr("required", true);
+                        sortingValue(data.data, $('select[name="SubjectID"]'));
                     }
                 },
             });
         });
-
-        /**** Ajax call to get subject based on course ****/ 
-        // $('body').on('change', '#course_id', function(){
-        //     var course_id = $("#course_id").val();
-        //     $.ajax({
-        //         url:"{{route('subject_ajaxget')}}",
-        //         type:'POST',
-        //         dataType:'json',
-        //         data:{'course_id':course_id},
-        //         success:function(data) {
-        //             if (data.success) {
-        //                 $('select[name="SubjectID"]').empty();
-        //                 $('input[name="CourseSubjectID"]').val('');
-        //                 $('select[name="SubjectID"]').append('<option value=""> Please Select Subject </option>');
-        //                 $.each(data.data, function(key, value) {
-        //                     $('select[name="SubjectID"]').append('<option value="'+ key +'">'+ value +'</option>');
-        //                 });
-        //                 $('select[name="SubjectID"]').attr("required", true);
-        //             }
-        //         },
-        //     });
-        // });
-
     });
 </script>
 @stop

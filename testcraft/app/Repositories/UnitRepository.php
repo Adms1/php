@@ -108,17 +108,10 @@ class UnitRepository
     {
         try {
             // Find unit by name if exist then get unit id else add new unit
-
             $unit = Unit::find($unit_id);
             $unit->fill($data);
             $unit->save();
 
-            /*$unit = Unit::where('UnitName', $data['UnitName'])->first();
-            if (empty($unit)) {
-                $unit = new Unit();
-                $unit->UnitName = $data['UnitName'];
-                $unit->save();
-            }*/
             // delete old and create new relation between unit and unit chapters
             if ($unit) {
                 UnitChapter::where('UnitID', $unit_id)->delete();
@@ -135,16 +128,6 @@ class UnitRepository
             }
             return false;
 
-
-            // $unit = Unit::find($unit_id);
-            // $unit->fill($data);
-            // $unit->save();
-            // if ($unit) {
-            //     UnitChapter::where('UnitID', $unit_id)->delete();
-            //     $data['UnitID'] = $unit['UnitID'];
-            //     UnitChapter::create($data);
-            // }
-            // return $unit;
         } catch (\Exception $e) {
             Log::channel('loginfo')
                 ->error('unit update.',['UnitRepository/update', $e->getMessage()]);
@@ -159,6 +142,6 @@ class UnitRepository
      */
     public function getUnitList()
     {   
-        return Unit::pluck('UnitName');
+        return Unit::where('IsActive', 1)->pluck('UnitName');
     }
 }

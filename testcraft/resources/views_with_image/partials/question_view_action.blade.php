@@ -1,0 +1,1 @@
+<i data-toggle="modal" data-qID="{{$question->QuestionID}}" data-target="#viewQuestion" class="fa fa-eye font-20 pointer-cursor" onclick=""></i>

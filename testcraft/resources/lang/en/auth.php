@@ -14,8 +14,10 @@ return [
     */
 
     'success' => 'User Login successfully.',
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'Invalid email or password.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'logout' => 'You are successfully logout.',
+    'otp_success' => 'OTP has been sent to your registered mobile number.', 
+    'otp_failed' => 'Invalid code, Please re-enter.', 
 
 ];

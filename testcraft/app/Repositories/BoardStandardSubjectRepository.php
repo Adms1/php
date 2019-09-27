@@ -94,31 +94,4 @@ class BoardStandardSubjectRepository
             return false;
         }
     }
-
-    /**
-     * Get boardStandardSubjectID.
-     *
-     * @param int $board_id
-     * @param int $standard_id
-     * @param int $subject_id
-     * @return \Illuminate\Http\Response
-     */
-/*    public function getBoardStandardSubjectID($board_id, $standard_id, $subject_id)
-    {
-        try {
-            $board_standard_subjects = DB::select('exec SP_Web_Get_BoardStandardSubject');
-
-            foreach ($board_standard_subjects as $key => $board_standard_subject) {
-                if ($board_id == $board_standard_subject->BoardID && 
-                    $standard_id == $board_standard_subject->StandardID && 
-                    $subject_id == $board_standard_subject->SubjectID) {
-                    return $board_standard_subject->BoardStandardSubjectID;
-                }
-            }
-        } catch (\Exception $e) {
-            Log::channel('loginfo')
-                ->error('board standard subject id.',['BoardStandardSubjectRepository/getBoardStandardSubjectID', $e->getMessage()]);
-            return false;
-        }
-    }*/
 }

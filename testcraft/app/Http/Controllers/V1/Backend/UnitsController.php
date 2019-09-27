@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\UnitRepository;
 use App\Repositories\BoardRepository;
-use App\Repositories\SubjectRepository;
-use App\Repositories\StandardRepository;
 use App\Repositories\ChapterRepository;
 use App\Http\Requests\UnitStoreRequest;
+use App\Repositories\SubjectRepository;
+use App\Repositories\StandardRepository;
 use App\Http\Requests\UnitUpdateRequest;
 use Config;
 use Lang;
@@ -102,17 +102,6 @@ class UnitsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -148,17 +137,6 @@ class UnitsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
      * Get unit name list by ajax call
      *
      * @param  Illuminate\Http\Request $request
@@ -166,8 +144,6 @@ class UnitsController extends Controller
      */
     public function getUnitListByAjax(Request $request)
     {
-        $data = [];
-
         $units = $this->unitRepository->getUnitList();
 
         return response()->json([

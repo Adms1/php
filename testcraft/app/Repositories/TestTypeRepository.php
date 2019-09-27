@@ -52,17 +52,7 @@ class TestTypeRepository
      */
     public function getTestTypeDropdown()
     {   
-        return TestType::pluck('TestTypeName','TestTypeID');
-    }
-
-    /**
-     * Get test types dropdoown.
-     *
-     * @return array $data
-     */
-    public function storeTestPackageTest($data)
-    {   
-        return TestType::pluck('TestTypeName','TestTypeID');
+        return TestType::where('IsActive', 1)->pluck('TestTypeName','TestTypeID');
     }
 
     /**
@@ -76,11 +66,11 @@ class TestTypeRepository
         $package_data = TestPackage::find($package_id);
 
         return BoardStandardSubjectChapterTopic::with(['chapter'])
-                                        ->where('BoardID', $package_data->BoardID)
-                                        ->where('StandardID', $package_data->StandardID)
-                                        ->where('SubjectID', $package_data->SubjectID)
-                                        ->get()
-                                        ->pluck('chapter.ChapterName','chapter.ChapterID');
+                        ->where('BoardID', $package_data->BoardID)
+                        ->where('StandardID', $package_data->StandardID)
+                        ->where('SubjectID', $package_data->SubjectID)
+                        ->get()
+                        ->pluck('chapter.ChapterName','chapter.ChapterID');
     }
 
     /**
@@ -94,11 +84,11 @@ class TestTypeRepository
         $package_data = TestPackage::find($package_id);
 
         return BoardStandardSubjectChapterTopic::with(['topic'])
-                                        ->where('BoardID', $package_data->BoardID)
-                                        ->where('StandardID', $package_data->StandardID)
-                                        ->where('SubjectID', $package_data->SubjectID)
-                                        ->get()
-                                        ->pluck('topic.TopicName','topic.TopicID');
+                        ->where('BoardID', $package_data->BoardID)
+                        ->where('StandardID', $package_data->StandardID)
+                        ->where('SubjectID', $package_data->SubjectID)
+                        ->get()
+                        ->pluck('topic.TopicName','topic.TopicID');
     }
 
     /**

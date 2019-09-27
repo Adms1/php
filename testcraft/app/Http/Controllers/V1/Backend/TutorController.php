@@ -9,6 +9,8 @@ use App\Repositories\TutorRepository;
 use App\Repositories\InstituteRepository;
 use App\Http\Requests\TutorStoreRequest;
 use App\Http\Requests\TutorUpdateRequest;
+use App\Http\Requests\TutorProfileUpdateRequest;
+use Session;
 use Config;
 use Lang;
 use Hash;
@@ -59,18 +61,52 @@ class TutorController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for tutor profile update
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showTutorProfile()
+    {
+        $tutor = $this->tutorRepository->edit(Auth::guard('tutor')->user()->TutorID);
+        return view('tutor.profile', compact('tutor'));
+    }
+
+    /**
+     * Update tutor's profile
+     *
+     * @param  \App\Http\Requests\TutorProfileUpdateRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateTutorProfile(TutorProfileUpdateRequest $request)
+    {
+        $data = $request->all();
+
+        $image_info = $this->baseRepository->imageUpload($request, $type='tutor');
+        if (!empty($image_info)) {
+            $data['Photo'] = Config::get('settings.TUTOR_IMG_PATH') . '/' .$image_info['image_name'];
+        }
+
+        $tutor = $this->tutorRepository->update($data, Auth::guard('tutor')->user()->TutorID);
+        if ($tutor) {
+            return redirect()->route('tutor_profile')->with('success', Lang::get('admin.ca_profile_update_success'));
+        }
+        return redirect()->route('tutor_profile')->with('error', Lang::get('admin.ca_profile_update_failed'));
+    }
+
+    /**
+     * Show the form for tutor registration
      *
      * @return \Illuminate\Http\Response
      */
     public function register()
     {
         $institutes = $this->instituteRepository->getInstituteDropdown();
-        return view('tutor.register', compact('institutes'));
+        $title = Lang::get('admin.ca_registration');
+        return view('tutor.register', compact('institutes', 'title'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new tutor for admin use.
      *
      * @return \Illuminate\Http\Response
      */
@@ -80,7 +116,7 @@ class TutorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created tutor in storage.
      *
      * @param  \App\Http\Requests\TutorStoreRequest  $request
      * @return \Illuminate\Http\Response
@@ -92,26 +128,45 @@ class TutorController extends Controller
 
         $image_info = $this->baseRepository->imageUpload($request, $type='tutor');
         if (!empty($image_info)) {
-            $data['Icon'] = Config::get('settings.TUTOR_IMG_PATH') . '/' .$image_info['image_name'];
+            $data['Photo'] = Config::get('settings.TUTOR_IMG_PATH') . '/' .$image_info['image_name'];
         }
 
-        $response = $this->tutorRepository->store($data);
-        if ($response) {
-            return redirect()->route('home')
-                ->with('success', Lang::get('admin.ca_create_successfully'));
+        $tutor = $this->tutorRepository->store($data);
+        if ($tutor) {
+            Session::put('tutor_id', $tutor->TutorID);
+            Session::put('mobile', $tutor->TutorPhoneNumber);
+            $title = Lang::get('admin.ca_registration');
+            $this->tutorRepository->sendOtp($tutor->TutorPhoneNumber);
+            return view('tutor.register_otp', compact('tutor', 'title'));
         }
-        return redirect()->route('tutors.index')->with('error', Lang::get('admin.ca_create_failed'));
     }
 
     /**
-     * Display the specified resource.
+     * Resend otp for valification by mobile number.
+     *
+     * @param  Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function reSendOtp(Request $request)
+    {
+        $data = $request->all();
+        $obj = $this->tutorRepository->sendOtp($data['TutorPhoneNumber']);
+        return response()->json([
+            'success' => true,
+            'data' => $obj->data,
+        ]);
+    }
+
+    /**
+     * Active Tutor
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function activeTutorByID($id)
     {
-        //
+        $this->tutorRepository->activeTutorByID($id);
+        return redirect()->route('home')->with('success', Lang::get('auth.success'));
     }
 
     /**
@@ -139,7 +194,7 @@ class TutorController extends Controller
 
         $image_info = $this->baseRepository->imageUpload($request, $type='tutor');
         if (!empty($image_info)) {
-            $data['Icon'] = Config::get('settings.TUTOR_IMG_PATH') . '/' .$image_info['image_name'];
+            $data['Photo'] = Config::get('settings.TUTOR_IMG_PATH') . '/' .$image_info['image_name'];
         }
 
         $response = $this->tutorRepository->update($data, $id);
@@ -149,16 +204,5 @@ class TutorController extends Controller
         }
 
         return redirect()->route('tutors.index')->with('error', Lang::get('admin.ca_update_failed'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

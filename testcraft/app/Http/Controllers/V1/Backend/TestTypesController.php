@@ -37,73 +37,7 @@ class TestTypesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Get dropdown by ajax call based on test type
      *
      * @return \Illuminate\Http\Response
      */
@@ -112,15 +46,15 @@ class TestTypesController extends Controller
         $package_id = $request->id;
         $test_type_id = $request->test_type_id;
         switch ($test_type_id) {
-            case '1':
+            case '1': // Chapter
                 $test_types = $this->testTypeRepository->getChapterDropdown($package_id);
                 break;
 
-            case '2':
+            case '2': // Topic
                 $test_types = $this->testTypeRepository->getTopicDropdown($package_id);
                 break;
 
-            case '3':
+            case '3': // Unit
                 $test_types = $this->testTypeRepository->getUnitDropdown();
                 break;
 

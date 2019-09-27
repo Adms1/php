@@ -1,3 +1,0 @@
-[2019-08-09 12:02:09] local.ERROR: section list. ["TestPackagesRepository/getSectionList","strpos() expects parameter 1 to be string, array given"] 
-[2019-08-09 12:05:44] local.ERROR: section list. ["TestPackagesRepository/getSectionList","Call to undefined method App\\TestSection::withAndWhereHas()"] 
-[2019-08-09 13:36:19] local.ERROR: section list. ["TestPackagesRepository/getSectionList","mb_strpos() expects parameter 1 to be string, object given"] 

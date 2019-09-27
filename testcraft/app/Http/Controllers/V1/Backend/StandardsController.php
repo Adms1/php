@@ -29,8 +29,10 @@ class StandardsController extends Controller
      *
      * @return void
      */
-    public function __construct(BaseRepository $baseRepository, StandardRepository $standardRepository)
-    {
+    public function __construct(
+        BaseRepository $baseRepository,
+        StandardRepository $standardRepository
+    ){
         $this->baseRepository = $baseRepository;
         $this->standardRepository = $standardRepository;
     }
@@ -81,17 +83,6 @@ class StandardsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -129,17 +120,6 @@ class StandardsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
      * Get standard list by ajax call based on board id
      *
      * @param  Illuminate\Http\Request $request
@@ -154,9 +134,6 @@ class StandardsController extends Controller
 
         if ($validator->passes()) {
             $standards = $this->standardRepository->getStandardListByBoardID($request->board_id);
-            // foreach ($standards as $key => $standard) {
-            //     $data[$standard->StandardID] = $standard->StandardName;
-            // }
             return response()->json([
                 'success' => true,
                 'data'  => $standards,

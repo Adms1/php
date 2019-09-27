@@ -66,8 +66,7 @@
     <body>
         <div class="flex-center position-ref full-height">
             <div class="top-right links">
-                <!-- <a href="{{ route('admin_login') }}">Admin</a>
-                <a href="{{ route('tutor_login') }}">Tutor</a> -->
+
             </div>
 
             <div class="content">

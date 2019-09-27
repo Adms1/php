@@ -97,34 +97,13 @@ class StandardRepository
     }
 
     /**
-     * Get ajax resource by id.
-     *
-     * @param int $board_id
-     * @return \Illuminate\Http\Response
-     */
-    // public function getStandardListByBoard($board_id)
-    // {
-    //     try {
-    //         return DB::select('exec SP_Web_Get_BoardStandard_List ?', 
-    //                     array(
-    //                         $board_id,
-    //                     )
-    //                 );
-    //     } catch (\Exception $e) {
-    //         Log::channel('loginfo')
-    //             ->error('standard list by ajax.', ['StandardRepository/getStandardListByBoardId', $e->getMessage()]);
-    //         return false;
-    //     }
-    // }
-
-    /**
      * Get standard dropdoown.
      *
      * @return array $data
      */
     public function getStandardDropdown()
     {   
-        return Standard::pluck('StandardName','StandardID');
+        return Standard::where('IsActive', 1)->pluck('StandardName','StandardID');
     }
 
     /**
@@ -136,10 +115,15 @@ class StandardRepository
     public function getStandardListByBoardID($board_id)
     {
         try {
-            return BoardStandardSubjectChapterTopic::with(['standard'])
-                        ->where('BoardID', $board_id)
-                        ->get()
-                        ->pluck('standard.StandardName','standard.StandardID');
+            return BoardStandardSubjectChapterTopic::leftJoin('Standard', 'Standard.StandardID', 'BoardStandardSubjectChapterTopic.StandardID')
+                                ->where('BoardStandardSubjectChapterTopic.IsActive', 1)
+                                ->where('BoardID', $board_id)
+                                ->select('StandardName', 'Standard.StandardID', 'OrderNumber')
+                                ->distinct()
+                                ->orderBy('Standard.OrderNumber')
+                                ->get()
+                                ->pluck('StandardName', 'StandardID');
+
         } catch (\Exception $e) {
             Log::channel('loginfo')
                 ->error('standard list by ajax.', ['StandardRepository/getStandardListByBoardId', $e->getMessage()]);
